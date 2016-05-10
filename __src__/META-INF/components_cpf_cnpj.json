@@ -1,0 +1,30 @@
+{
+	"name": "cronos-components",
+	"version": "1.0.0",
+	"components": [
+		{
+			"name": "crn-cpfinput",
+			"text": "CPF",
+			"class": "cpn cpn-textinput",
+			"templateURL": "webcontent/components/templates/cpf-input.template.html",
+			"properties": {
+				"onchange": {
+					"removable": true,
+					"type": "event"
+				}
+			}
+		},
+		{
+			"name": "crn-cnpjinput",
+			"text": "CNPJ",
+			"class": "cpn cpn-textinput",
+			"templateURL": "webcontent/components/templates/cnpj-input.template.html",
+			"properties": {
+				"onchange": {
+					"removable": true,
+					"type": "event"
+				}
+			}
+		}
+	]
+}
