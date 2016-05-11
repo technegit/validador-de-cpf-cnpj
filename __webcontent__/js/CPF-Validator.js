@@ -6,7 +6,7 @@
  **/
 app.userEvents.validateCPF = function(){
 //app.userEvents.validateCPF = function(cpf) {
-  var cpf = event.srcElement; // Obtem o valor do proprio elemento caller do evento.
+  var cpf = event.srcElement; // Obtem o elemento caller do evento.
 	var strCPF = cpf.value;
 	//strCPF = strCPF.replace('.', '');
 		
@@ -37,7 +37,8 @@ app.userEvents.validateCPF = function(){
 	}
 	
 	if(numeroRepetido) {
-	  $("#cpfAlert").show();
+	  //$("#cpfAlert").show();
+	  getAlertCPF(event).show();
 	  //cpf.value = "";
 	  
 		return false;
@@ -82,10 +83,12 @@ app.userEvents.validateCPF = function(){
 	if(cpfNumero[9] == digitoVerificador1 &&
 	   cpfNumero[10] == digitoVerificador2) {
 		   cpf.value = autoApplyMaskToCPF(cpf.value);
-		  $("#cpfAlert").hide();
+		  // $("#cpfAlert").hide();
+		  getAlertCPF(event).hide();
 		   return true;
 	} else {
-		$("#cpfAlert").show();
+		//$("#cpfAlert").show();
+		getAlertCPF(event).show();
 		//cpf.value = "";
 		return false;
 	}
@@ -105,7 +108,8 @@ function autoApplyMaskToCPF(input) {
 
 
 app.userEvents.removeMaskFromCPF = function(){
-  $("#cpfAlert").hide();
+  //$("#cpfAlert").hide();
+  getAlertCPF(event).hide();
   
   var input = event.srcElement;
   var str = input.value + '';
@@ -126,3 +130,12 @@ function replaceAll(str, oldChar, newChar) {
 	
 	return str;
 };
+
+// Função que retorna o elemento responsável pela exibição da div de mensagem de alerta, para o elemento caller.
+// Necessário, pois pode haver mais de um componente validador (CPF/CNPJ) na tela.
+function getAlertCPF(event) {
+    var elementCaller = event.srcElement; // Obtem o elemento caller do evento.
+    var msgAlert = $(elementCaller).parent().find("div[id=cpfAlert]");  // Obtem o elemento de mensagem para o caller do evento.
+    
+    return msgAlert;
+}

@@ -5,6 +5,7 @@
  * @param cnpj Objeto (elemento html) que contém o número do CNPJ a ser validado.
  **/
 app.userEvents.validateCNPJ = function() {
+//app.userEvents.validateCNPJ = function(cnpj) {
   var cnpj = event.srcElement;  //Obtem o valor do proprio elemento caller do evento.
 	var strCNPJ = cnpj.value;
 	
@@ -37,7 +38,8 @@ app.userEvents.validateCNPJ = function() {
 	}
 	
 	if(numeroRepetido) {
-	  $("#cnpjAlert").show();
+	  //$("#cnpjAlert").show();
+	  getAlertCNPJ(event).show();
 	  //cnpj.value = "";
 	  
 		return false;
@@ -87,15 +89,17 @@ app.userEvents.validateCNPJ = function() {
 	
 	//console.log("CNPJ: " + strCNPJ + " - Digito Verificador 1: " + digitoVerificador1 + " - Digito Verificador 2: " + digitoVerificador2);
 	
-	// Valida os digitos do CPF informado
+	// Valida os digitos do CNPJ informado
 	if(cnpjNumero[12] == digitoVerificador1 &&
 	   cnpjNumero[13] == digitoVerificador2) {
 		   cnpj.value = autoApplyMaskToCNPJ(cnpj.value);
-		   $("#cnpjAlert").hide();
+		   //$("#cnpjAlert").hide();
+		   getAlertCNPJ(event).hide();
 		   return true;
 	} else {
 		//alert("CNPJ invalido!");
-		$("#cnpjAlert").show();
+		//$("#cnpjAlert").show();
+		getAlertCNPJ(event).show();
 		//cnpj.value = "";
 		return false;
 	}
@@ -114,7 +118,8 @@ function autoApplyMaskToCNPJ(input) {
 
 
 app.userEvents.removeMaskFromCNPJ = function(){
-  $("#cnpjAlert").hide();
+  // $("#cnpjAlert").hide();
+  getAlertCNPJ(event).hide();
   
   var input = event.srcElement;
   var str = input.value + '';
@@ -135,3 +140,12 @@ function replaceAll(str, oldChar, newChar) {
 	
 	return str;
 };
+
+// Função que retorna o elemento responsável pela exibição da div de mensagem de alerta, para o elemento caller.
+// Necessário, pois pode haver mais de um componente validador (CPF/CNPJ) na tela.
+function getAlertCNPJ(event) {
+    var elementCaller = event.srcElement; // Obtem o elemento caller do evento.
+    var msgAlert = $(elementCaller).parent().find("div[id=cnpjAlert]");  // Obtem o elemento de mensagem para o caller do evento.
+    
+    return msgAlert;
+}
