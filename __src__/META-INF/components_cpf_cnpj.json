@@ -6,7 +6,7 @@
 			"name": "crn-cpfinput",
 			"text": "CPF",
 			"class": "cpn cpn-textinput",
-			"templateURL": "webcontent/components/templates/cpf-input.template.html",
+			"templateURL": "${webcontent}/components/templates/cpf-input.template.html",
 			"properties": {
 				"onchange": {
 					"removable": true,
@@ -18,7 +18,7 @@
 			"name": "crn-cnpjinput",
 			"text": "CNPJ",
 			"class": "cpn cpn-textinput",
-			"templateURL": "webcontent/components/templates/cnpj-input.template.html",
+			"templateURL": "${webcontent}/components/templates/cnpj-input.template.html",
 			"properties": {
 				"onchange": {
 					"removable": true,
