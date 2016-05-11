@@ -25,7 +25,23 @@ app.userEvents.validateCNPJ = function() {
 		numeros[i] = cnpjNumero[i] = strCNPJ.charAt(i);
 	}
 	
-	console.log(numeros);
+	//console.log(numeros);
+	
+	// Valida CNPJ com todos os algarismos repetidos (ex. 00.000.000/0000-00)
+	var numeroRepetido = true;
+	for(var i = 0; i < (cnpjNumero.length - 1); i++){
+		if(cnpjNumero[i] != cnpjNumero[i + 1]) {
+			numeroRepetido = false;
+			break;
+		}
+	}
+	
+	if(numeroRepetido) {
+	  $("#cnpjAlert").show();
+	  //cnpj.value = "";
+	  
+		return false;
+	}
 	
 	// Multipica cada algarismo pelo seu peso correspondente.
 	for(var i = 0; i < pesos.length; i++) {
@@ -75,10 +91,12 @@ app.userEvents.validateCNPJ = function() {
 	if(cnpjNumero[12] == digitoVerificador1 &&
 	   cnpjNumero[13] == digitoVerificador2) {
 		   cnpj.value = autoApplyMaskToCNPJ(cnpj.value);
+		   $("#cnpjAlert").hide();
 		   return true;
 	} else {
 		//alert("CNPJ invalido!");
-		cnpj.value = "";
+		$("#cnpjAlert").show();
+		//cnpj.value = "";
 		return false;
 	}
 };
@@ -96,6 +114,8 @@ function autoApplyMaskToCNPJ(input) {
 
 
 app.userEvents.removeMaskFromCNPJ = function(){
+  $("#cnpjAlert").hide();
+  
   var input = event.srcElement;
   var str = input.value + '';
 	var chars = ['.', '-', '/'];

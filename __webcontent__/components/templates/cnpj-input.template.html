@@ -1,4 +1,8 @@
 <div class="form-group">
   <label class="">CPNJ:</label>
   <input type="text" class="form-control" placeholder="00000000000000" ng-blur="validateCNPJ()" ng-focus="removeMaskFromCNPJ(this)" maxlength="14">
+  <div id = "cnpjAlert" class = "alert alert-danger" style="display: none">
+    <!--<a class = "close" data-dismiss = "alert">&times;</a>-->
+    <strong>CNPJ Inválido!</strong>
+  </div>
 </div>

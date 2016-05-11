@@ -37,7 +37,8 @@ app.userEvents.validateCPF = function(){
 	}
 	
 	if(numeroRepetido) {
-	  cpf.value = "";
+	  $("#cpfAlert").show();
+	  //cpf.value = "";
 	  
 		return false;
 	}
@@ -81,10 +82,11 @@ app.userEvents.validateCPF = function(){
 	if(cpfNumero[9] == digitoVerificador1 &&
 	   cpfNumero[10] == digitoVerificador2) {
 		   cpf.value = autoApplyMaskToCPF(cpf.value);
+		  $("#cpfAlert").hide();
 		   return true;
 	} else {
-		//alert("CPF invalido!");
-		cpf.value = "";
+		$("#cpfAlert").show();
+		//cpf.value = "";
 		return false;
 	}
 };
@@ -103,6 +105,8 @@ function autoApplyMaskToCPF(input) {
 
 
 app.userEvents.removeMaskFromCPF = function(){
+  $("#cpfAlert").hide();
+  
   var input = event.srcElement;
   var str = input.value + '';
 	var chars = ['.', '-', '/'];
